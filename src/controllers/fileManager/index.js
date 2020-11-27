@@ -1,4 +1,4 @@
-import { upload, getFiles } from '../services/fileManager';
+import { upload, getFiles } from '../../services/fileManager';
 
 export const uploadFiles = async (req, res, next) => {
   const { files } = req.body;

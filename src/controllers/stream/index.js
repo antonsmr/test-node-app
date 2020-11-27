@@ -1,14 +1,15 @@
 import appRoot from 'app-root-path';
 
+import { getStat } from '../../services/stream';
+
 const fs = require('fs');
 
 export const getStream = async (req, res, next) => {
   const { fileName } = req.query;
   const { range } = req.headers;
 
-  const filePath = `${appRoot}/assets/${fileName}`;
-  const stat = fs.statSync(filePath);
-  const fileSize = stat.size;
+  const statResult = await getStat(fileName);
+  const { filePath, fileSize } = statResult;
 
   if (range) {
     const parts = range.replace(/bytes=/, "").split("-");
